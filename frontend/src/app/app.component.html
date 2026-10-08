@@ -1,19 +1,43 @@
-<div style="max-width: 500px; margin: 50px auto; font-family: sans-serif; padding: 20px; border: 1px solid #ccc; border-radius: 8px; background: #fff;">
-  <h2 style="text-align: center; color: #333;">Add Task</h2>
-  <form (ngSubmit)="handleAddTodo()" style="display: flex; gap: 10px; margin-bottom: 20px;">
-    <input type="text" [ngModel]="newTodoTitle()" (ngModelChange)="newTodoTitle.set($event)" name="title" placeholder="Add a new task..." style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required />
-    <button type="submit" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Add</button>
-  </form>
-  @if (todos().length === 0) {
-    <p style="text-align: center; color: #777; font-style: italic;">No tasks found. Create a new task to begin.</p>
-  } @else {
-    <ul style="list-style: none; padding: 0; margin: 0;">
-      @for (item of todos(); track item.id) {
-        <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee;">
-          <span style="color: #444;">{{ item.title }}</span>
-          <button (click)="handleDelete(item.id)" style="background: none; color: #dc3545; border: none; cursor: pointer; font-size: 20px; font-weight: bold;">&times;</button>
-        </li>
+<!-- src/app/app.component.html -->
+<div class="container">
+  <header>
+    <h1>Task Management Dashboard</h1>
+  </header>
+
+  <main>
+    <!-- Add Item Section Form Input -->
+    <div class="form-container">
+      <input 
+        type="text" 
+        [ngModel]="newTaskTitle()" 
+        (ngModelChange)="newTaskTitle.set($event)"
+        (keyup.enter)="handleCreateTodo()"
+        placeholder="Enter your task details here..." 
+        aria-label="New task descriptive text" />
+      <button (click)="handleCreateTodo()" [disabled]="!newTaskTitle().trim()">
+        Add Task
+      </button>
+    </div>
+
+    <!-- Active Structural Items Mapping -->
+    <div class="list-wrapper">
+      @if (todoService.todos().length === 0) {
+        <p class="empty-state">No current items recorded. Create one above!</p>
+      } @else {
+        <ul class="todo-list">
+          @for (item of todoService.todos(); track item.id) {
+            <li class="todo-item">
+              <span class="title-text">{{ item.title }}</span>
+              <button 
+                class="delete-btn" 
+                (click)="handleDeleteTodo(item.id)"
+                [attr.aria-label]="'Delete ' + item.title">
+                Delete
+              </button>
+            </li>
+          }
+        </ul>
       }
-    </ul>
-  }
+    </div>
+  </main>
 </div>

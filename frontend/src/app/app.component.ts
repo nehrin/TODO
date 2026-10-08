@@ -1,49 +1,33 @@
+// src/app/app.component.ts
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
-
-export interface TodoItem { id: string; title: string; isCompleted: boolean; }
+import { TodoService } from './services/todo.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5199/api/todo'; // Adjust port matching your .NET project
+  protected readonly todoService = inject(TodoService);
+  protected newTaskTitle = signal<string>('');
 
-  newTodoTitle = signal<string>('');
-  todos = signal<TodoItem[]>([]);
-
-  async ngOnInit() {
-    await this.loadTodos();
+  ngOnInit(): void {
+    this.todoService.loadAllTodos();
   }
 
-  async loadTodos() {
-    try {
-      const data = await firstValueFrom(this.http.get<TodoItem[]>(this.apiUrl));
-      this.todos.set(data);
-    } catch (e) { console.error('Failed to load tasks', e); }
+  protected async handleCreateTodo(): Promise<void> {
+    const currentTitle = this.newTaskTitle().trim();
+    if (!currentTitle) return;
+
+    await this.todoService.addTodo(currentTitle);
+    this.newTaskTitle.set(''); // Clear form state smoothly via signals
   }
 
-  async handleAddTodo() {
-    const title = this.newTodoTitle().trim();
-    if (!title) return;
-    try {
-      const newItem = await firstValueFrom(this.http.post<TodoItem>(this.apiUrl, { title }));
-      this.todos.update(current => [newItem, ...current]);
-      this.newTodoTitle.set('');
-    } catch (e) { console.error(e); }
-  }
-
-  async handleDelete(id: string) {
-    try {
-      await firstValueFrom(this.http.delete(`${this.apiUrl}/${id}`));
-      this.todos.update(current => current.filter(t => t.id !== id));
-    } catch (e) { console.error(e); }
+  protected async handleDeleteTodo(id: string): Promise<void> {
+    await this.todoService.deleteTodo(id);
   }
 }

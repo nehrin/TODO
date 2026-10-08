@@ -1,82 +1,10 @@
-body {
-  background-color: #f4f6f9;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.todo-container {
-  max-width: 550px;
-  margin: 50px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-h1 {
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 25px;
-}
-.todo-form {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 25px;
-}
-.todo-form input {
-  flex: 1;
-  padding: 12px;
-  border: 2px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border-color 0.2s;
-}
-.todo-form input:focus {
-  outline: none;
-  border-color: #3b82f6;
-}
-.todo-form button {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 0 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.todo-form button:disabled {
-  background: #cbd5e1;
-  cursor: not-allowed;
-}
-.todo-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.todo-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px;
-  border-bottom: 1px solid #f1f5f9;
-}
-.todo-item:last-child {
-  border-bottom: none;
-}
-.todo-text {
-  color: #334155;
-  font-size: 16px;
-}
-.delete-btn {
-  background: transparent;
-  color: #ef4444;
-  border: none;
-  font-size: 22px;
-  cursor: pointer;
-  line-height: 1;
-}
-.delete-btn:hover {
-  color: #dc2626;
-}
-.empty-state {
-  text-align: center;
-  color: #64748b;
-  font-style: italic;
-}
+/* src/app/app.component.css */
+.container { max-width: 600px; margin: 2rem auto; padding: 0 1rem; font-family: sans-serif; }
+.form-container { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+input { flex: 1; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+button { padding: 0.75rem 1.25rem; background-color: #0076d6; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+button:disabled { background-color: #cccccc; cursor: not-allowed; }
+.todo-list { list-style: none; padding: 0; margin: 0; }
+.todo-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border-bottom: 1px solid #eee; }
+.delete-btn { background-color: #dc3545; padding: 0.4rem 0.8rem; font-size: 0.875rem; }
+.empty-state { text-align: center; color: #666; margin-top: 2rem; }
