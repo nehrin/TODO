@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "6ttFMXSqY58=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nehri\\source\\repos\\TODO\\backend\\TodoApp.Api\\TodoApp.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nehri\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.12\\microsoft.aspnetcore.openapi.10.0.12.nupkg.sha512",
+    "C:\\Users\\nehri\\.nuget\\packages\\microsoft.extensions.apidescription.server\\10.0.0\\microsoft.extensions.apidescription.server.10.0.0.nupkg.sha512",
+    "C:\\Users\\nehri\\.nuget\\packages\\microsoft.openapi\\2.12.0\\microsoft.openapi.2.12.0.nupkg.sha512",
+    "C:\\Users\\nehri\\.nuget\\packages\\swashbuckle.aspnetcore\\10.3.0\\swashbuckle.aspnetcore.10.3.0.nupkg.sha512",
+    "C:\\Users\\nehri\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\10.3.0\\swashbuckle.aspnetcore.swagger.10.3.0.nupkg.sha512",
+    "C:\\Users\\nehri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\10.3.0\\swashbuckle.aspnetcore.swaggergen.10.3.0.nupkg.sha512",
+    "C:\\Users\\nehri\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\10.3.0\\swashbuckle.aspnetcore.swaggerui.10.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}
