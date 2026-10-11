@@ -8,3 +8,8 @@ button:disabled { background-color: #cccccc; cursor: not-allowed; }
 .todo-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border-bottom: 1px solid #eee; }
 .delete-btn { background-color: #dc3545; padding: 0.4rem 0.8rem; font-size: 0.875rem; }
 .empty-state { text-align: center; color: #666; margin-top: 2rem; }
+.validation-error {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}

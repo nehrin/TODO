@@ -101,4 +101,48 @@ public class TodoControllerTests
         var notFound = Assert.IsType<NotFoundObjectResult>(result);
         Assert.Contains(id.ToString(), notFound.Value?.ToString() ?? string.Empty, StringComparison.OrdinalIgnoreCase);
     }
+
+    [Fact]
+    public async Task CreateTodo_TitleExceeds300Characters_ReturnsBadRequest()
+    {
+        // Arrange
+        var mock = new Mock<ITodoService>();
+        var controller = new TodoController(mock.Object);
+
+        var request = new CreateTodoRequest
+        {
+            Title = new string('A', 301)
+        };
+
+        // Simulate ASP.NET Core model validation.
+        var validationResults = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+        var validationContext = new System.ComponentModel.DataAnnotations.ValidationContext(request);
+
+        bool isValid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(
+            request,
+            validationContext,
+            validationResults,
+            validateAllProperties: true
+        );
+
+        foreach (var validationResult in validationResults)
+        {
+            controller.ModelState.AddModelError(
+                nameof(request.Title),
+                validationResult.ErrorMessage ?? "Invalid title"
+            );
+        }
+
+        // Act
+        var actionResult = await controller.CreateTodo(request);
+
+        // Assert
+        Assert.False(isValid);
+        Assert.IsType<BadRequestObjectResult>(actionResult.Result);
+
+        mock.Verify(
+            s => s.CreateAsync(It.IsAny<CreateTodoRequest>()),
+            Times.Never
+        );
+    }
 }

@@ -8,6 +8,7 @@ Features
     - Delete TODOs
 
 Please have the Backend running first before running fortend applcation.
+Input validated for character limit of 300 and patterns that contains executable code is rejected.
 
 Backend
 
@@ -29,6 +30,7 @@ Frontend
 
     Go to directory: frontend
     To install package: npm install --ignore-scripts --legacy-peer-deps
+    To build the application: ng build
     To run the application: ng serve
 
     Go to directory: frontend

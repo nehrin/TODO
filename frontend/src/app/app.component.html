@@ -1,3 +1,4 @@
+
 <!-- src/app/app.component.html -->
 <div class="container">
   <header>
@@ -7,14 +8,41 @@
   <main>
     <!-- Add Item Section Form Input -->
     <div class="form-container">
-      <input 
-        type="text" 
-        [ngModel]="newTaskTitle()" 
-        (ngModelChange)="newTaskTitle.set($event)"
+      <input
+        type="text"
+        [ngModel]="newTaskTitle()"
+        (ngModelChange)="newTaskTitle.set($event); todoService.errorMessage.set(null)"
         (keyup.enter)="handleCreateTodo()"
-        placeholder="Enter your task details here..." 
-        aria-label="New task descriptive text" />
-      <button (click)="handleCreateTodo()" [disabled]="!newTaskTitle().trim()">
+        placeholder="Enter your task details here..."
+        aria-label="New task descriptive text"
+        maxlength="300"
+        [attr.aria-invalid]="
+          newTaskTitle().length > 300 || !!todoService.errorMessage()
+        "
+        aria-describedby="title-error server-error"
+      />
+
+      @if (newTaskTitle().length > 300) {
+        <p id="title-error" class="validation-error" role="alert">
+          Task title must be below 300 characters. Current length:
+          {{ newTaskTitle().length }} characters.
+        </p>
+      }
+
+      <!-- Display server-side HTTP 400 validation errors -->
+      @if (todoService.errorMessage()) {
+        <p id="server-error" class="validation-error" role="alert">
+          {{ todoService.errorMessage() }}
+        </p>
+      }
+
+      <button
+        (click)="handleCreateTodo()"
+        [disabled]="
+          !newTaskTitle().trim() ||
+          newTaskTitle().length > 300
+        "
+      >
         Add Task
       </button>
     </div>
@@ -22,16 +50,19 @@
     <!-- Active Structural Items Mapping -->
     <div class="list-wrapper">
       @if (todoService.todos().length === 0) {
-        <p class="empty-state">No current items recorded. Create one above!</p>
+        <p class="empty-state">
+          No current items recorded. Create one above!
+        </p>
       } @else {
         <ul class="todo-list">
           @for (item of todoService.todos(); track item.id) {
             <li class="todo-item">
               <span class="title-text">{{ item.title }}</span>
-              <button 
-                class="delete-btn" 
+              <button
+                class="delete-btn"
                 (click)="handleDeleteTodo(item.id)"
-                [attr.aria-label]="'Delete ' + item.title">
+                [attr.aria-label]="'Delete ' + item.title"
+              >
                 Delete
               </button>
             </li>
