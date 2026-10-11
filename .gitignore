@@ -6,6 +6,16 @@
 *.launch
 .settings/
 *.sublime-workspace
+backend/**/bin/
+backend/**/obj/
+backend/TodoApp.Tests/obj/Debug/
+backend/TodoApp.Api/bin/Debug/net10.0
+backend/TodoApp.Api/obj/Debug/
+backend/TodoApp.Api/obj/Debug/net10.0/
+backend/TodoApp.Tests/obj/Release/
+backend/TodoApp.Tests/bin/Debug/
+frontend/dist/
+frontend/dist/todo-frontend/
 
 # Visual Studio Code
 .vscode/*
@@ -14,6 +24,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+.vs/
 
 # Dependencies
 node_modules/

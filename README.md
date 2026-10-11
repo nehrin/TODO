@@ -1,34 +1,30 @@
 This repository contains a simple TODO list application with an ASP.NET Core Web API backend and an Angular frontend.
 
-
-
 Features
 
 
+    - View TODOs
+    - Add TODOs
+    - Delete TODOs
 
-View TODOs
-
-Add TODOs
-
-Delete TODOs
+Please have the Backend running first before running fortend applcation.
 
 Backend
 
+    Project: TODOApplication.Server
+    Tech: .NET 10 Web API
+    Data: In-memory repository (no database)
 
-
-Project: TODOApplication.Server
-
-Tech: .NET 10 Web API
-
-Data: In-memory repository (no database)
+    Go to directory: backend\TodoApp.Api
+    To Build project : dotnet build
+    To Run the application: dotnet run
 
 Frontend
 
+    Project: todoapplication.client
+    Tech: Angular 22
 
-
-Project: todoapplication.client
-
-Tech: Angular (latest specified in package.json)
-
-
+    Go to direction: frontend
+    To install package: npm install --ignore-scripts --legacy-peer-deps
+    To run the application: ng serve
 
